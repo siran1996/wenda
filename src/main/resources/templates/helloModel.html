@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<p th:text="${value1}"></p>
+<table>
+    <tr>
+        <th>Color</th>
+    </tr>
+    <tr th:each="color:${colors}">
+        <td th:text="${color}">
+
+        </td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>Map</th>
+    </tr>
+    <tr th:each="i:${map}">
+        <td th:text="${i}">
+
+        </td>
+    </tr>
+</table>
+
+<p th:text="'User='+${user.name}"></p>
+</body>
+</html>
