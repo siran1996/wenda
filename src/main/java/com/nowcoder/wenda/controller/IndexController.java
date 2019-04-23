@@ -1,20 +1,18 @@
 package com.nowcoder.wenda.controller;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.Map;
 
 
-
-@RestController
+//@RestController
 @Controller
 public class IndexController {
 
-    @RequestMapping(value = {"hello","/"})
-    public String hello() {
+        @RequestMapping(value = "hello")
+        public String hello() {
         return new Date() + " : 欢迎您!";
     }
 
@@ -27,6 +25,11 @@ public class IndexController {
     {
         return String.format("Profile Page of %s %d,t:%d,k:%s",groupID,userID,type,key);
     }
+
+    @RequestMapping(path = "/helloHtml")
+    public String helloHtml(Map<String,Object> map) {
+        map.put("hello","from TemplateController.helloHtml");
+        return"/helloHtml";
 
 
 
