@@ -12,11 +12,13 @@ import java.util.*;
 public class IndexController {
 
     @RequestMapping(value = "hello",method = {RequestMethod.GET})
+    @ResponseBody
     public String hello() {
             return new Date() + " : 欢迎您!";
         }
 
     @RequestMapping(value ="/profile/{groupID}/{userID}")
+    @ResponseBody
     public String profile(@PathVariable("userID") int userID,
                           @PathVariable("groupID") String groupID,
                           @RequestParam(value = "type",defaultValue = "1") int type,
@@ -36,7 +38,7 @@ public class IndexController {
     public String helloModel(Model model) {
         model.addAttribute("value1","vvv1");
 
-        List<String> colors= Arrays.asList(new String[]{"RED","GREEN","BLUE"});
+        List<String> colors= Arrays.asList("RED","GREEN","BLUE");
         model.addAttribute("colors",colors);
 
         Map<String,String> map =new HashMap<>();
