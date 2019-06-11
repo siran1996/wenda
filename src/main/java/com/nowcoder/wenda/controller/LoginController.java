@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +38,7 @@ public class LoginController {
                     cookie.setMaxAge(3600*24*5);
                 }
                 response.addCookie(cookie);
-                if (StringUtils.isEmpty(next)) {
+                if (!StringUtils.isEmpty(next)) {
                     return "redirect:" + next;
                 }
                 return "redirect:/";
@@ -67,6 +64,7 @@ public class LoginController {
     public String login(Model model, @RequestParam("username") String username,
                         @RequestParam("password") String password,
                         @RequestParam(value="next", required = false) String next,
+//                        @PathVariable("next") String next,
                         @RequestParam(value="rememberme", defaultValue = "false") boolean rememberme,
                         HttpServletResponse response) {
         try {
@@ -78,7 +76,7 @@ public class LoginController {
                     cookie.setMaxAge(3600*24*5);
                 }
                 response.addCookie(cookie);
-                if (StringUtils.isEmpty(next)) {
+                if (!StringUtils.isEmpty(next)) {
                     return "redirect:" + next;
                 }
                 return "redirect:/";

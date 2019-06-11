@@ -49,12 +49,6 @@ public class HomeController {
         return "index";
     }
 
-    @RequestMapping(path = {"/index2"})
-    public String index2(Model model,
-                        @RequestParam(value = "pop", defaultValue = "0") int pop) {
-        model.addAttribute("vos", getQuestions(0, 0, 10));
-        return "index2";
-    }
 
     @RequestMapping(path = {"/user/{userId}"})
     public String userIndex(Model model, @PathVariable("userId") int userId) {

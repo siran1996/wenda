@@ -2,10 +2,12 @@ package com.nowcoder.wenda.DAO;
 
 import com.nowcoder.wenda.model.LoginTicket;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by nowcoder on 2016/7/2.
  */
+@Repository
 @Mapper
 public interface LoginTicketDAO {
     String TABLE_NAME = "login_ticket";
