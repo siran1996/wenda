@@ -12,5 +12,4 @@ public class WendaApplication {
 		SpringApplication.run(WendaApplication.class, args);
 	}
 
-
 }
