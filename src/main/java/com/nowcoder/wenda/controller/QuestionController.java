@@ -2,6 +2,7 @@ package com.nowcoder.wenda.controller;
 
 import com.nowcoder.wenda.model.*;
 import com.nowcoder.wenda.service.CommentService;
+import com.nowcoder.wenda.service.LikeService;
 import com.nowcoder.wenda.service.QuestionService;
 import com.nowcoder.wenda.service.UserService;
 import com.nowcoder.wenda.util.WendaUtil;
@@ -35,6 +36,9 @@ public class QuestionController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    LikeService likeService;
+
 
     @RequestMapping(value = "/question/{qid}", method = {RequestMethod.GET})
     public String questionDetail(Model model, @PathVariable("qid") int qid) {
@@ -45,9 +49,18 @@ public class QuestionController {
         for (Comment comment : commentList) {
             ViewObject vo = new ViewObject();
             vo.set("comment", comment);
+
+            if (hostHolder.getUser() == null) {
+                vo.set("liked", 0);
+            } else {
+                vo.set("liked", likeService.getLikeStatus(hostHolder.getUser().getId(), EntityType.ENTITY_COMMENT, comment.getId()));
+            }
+
+            vo.set("likeCount", likeService.getLikeCount(EntityType.ENTITY_COMMENT, comment.getId()));
+
             vo.set("user", userService.getUser(comment.getUserId()));
             vos.add(vo);
-        }
+    }
         model.addAttribute("comments", vos);
 
         return "detail";
