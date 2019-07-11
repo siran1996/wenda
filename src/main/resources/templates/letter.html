@@ -146,22 +146,16 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="../styles/letter.css">
+<link rel="stylesheet" media="all" href="../styles/letter.css">
     <div id="main">
-        <div th:each="conversation:${conversations}" class="zg-wrap zu-main clearfix ">
+        <div  class="zg-wrap zu-main clearfix ">
             <ul class="letter-list">
-<!--                #foreach ($conversation in $conversations)-->
-                <li id="conversation-item-10001_622873">
+                <li id="conversation-item-10001_622873" th:each="conversation:${conversations}">
                 <a class="letter-link" th:href="'/msg/detail?conversationId='+${conversation.get('conversation').conversationId}">
                 </a>
                 <div class="letter-info">
                 <span class="l-time" th:text="${#dates.format(conversation.get('conversation').createdDate,'yyyy-MM-dd HH:mm:ss')}"></span>
                 <div class="l-operate-bar">
-                    <!--
-                <a href="javascript:void(0);" class="sns-action-del" data-id="10001_622873">
-                删除
-                </a>
-                -->
                 <a th:href="'/msg/detail?conversationId='+${conversation.get('conversation').conversationId}"
                    th:text="${conversation.get('conversation').id}">
                 </a>
@@ -171,11 +165,11 @@
                 <span class="msg-num" th:text="${conversation.get('unread')}">
                 </span>
                 <a class="list-head">
-                <img alt="头像" src="$conversation.user.headUrl" th:src="${conversation.get('user').headUrl}">
+                <img alt="头像" th:src="${conversation.get('user').headUrl}">
                 </a>
                 </div>
                 <div class="letter-detail">
-                <a class="letter-name level-color-1" th:title="${conversation.get('user').name}" th:text="${conversation.get('user').name}">
+                <a class="letter-name level-color-1" title="通知" th:text="${conversation.get('user').name}">
                 </a>
                 <p class="letter-brief">
                 <a th:href="'/msg/detail?conversationId='+${conversation.get('conversation').conversationId}"

@@ -1,8 +1,8 @@
 package com.nowcoder.wenda.controller;
 
-//import com.nowcoder.async.EventModel;
-//import com.nowcoder.async.EventProducer;
-//import com.nowcoder.async.EventType;
+import com.nowcoder.wenda.async.EventModel;
+import com.nowcoder.wenda.async.EventProducer;
+import com.nowcoder.wenda.async.EventType;
 import com.nowcoder.wenda.model.Comment;
 import com.nowcoder.wenda.model.EntityType;
 import com.nowcoder.wenda.model.HostHolder;
@@ -30,8 +30,8 @@ public class LikeController {
     @Autowired
     CommentService commentService;
 
-//    @Autowired
-//    EventProducer eventProducer;
+    @Autowired
+    EventProducer eventProducer;
 
     @RequestMapping(path = {"/like"}, method = {RequestMethod.POST})
     @ResponseBody
@@ -42,10 +42,10 @@ public class LikeController {
 
         Comment comment = commentService.getCommentById(commentId);
 
-//        eventProducer.fireEvent(new EventModel(EventType.LIKE)
-//                .setActorId(hostHolder.getUser().getId()).setEntityId(commentId)
-//                .setEntityType(EntityType.ENTITY_COMMENT).setEntityOwnerId(comment.getUserId())
-//                .setExt("questionId", String.valueOf(comment.getEntityId())));
+        eventProducer.fireEvent(new EventModel(EventType.LIKE)
+                .setActorId(hostHolder.getUser().getId()).setEntityId(commentId)
+                .setEntityType(EntityType.ENTITY_COMMENT).setEntityOwnerId(comment.getUserId())
+                .setExt("questionId", String.valueOf(comment.getEntityId())));
 
         long likeCount = likeService.like(hostHolder.getUser().getId(), EntityType.ENTITY_COMMENT, commentId);
         return WendaUtil.getJSONString(0, String.valueOf(likeCount));
